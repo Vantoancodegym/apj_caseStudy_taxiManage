@@ -43,5 +43,16 @@ public abstract class Vehicle {
     public void setStatus(boolean avaiable) {
         isAvaiable = avaiable;
     }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "licensePlate='" + licensePlate + '\'' +
+                ", driverName='" + driverName + '\'' +
+                ", distance=" + distance +" revenue = "+getRevenue()+
+                ", isAvaiable=" + isAvaiable +
+                '}';
+    }
+
     public abstract int getRevenue();
 }

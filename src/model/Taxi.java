@@ -1,3 +1,5 @@
+package model;
+
 import model.Vehicle;
 
 public class Taxi extends Vehicle {
