@@ -1,5 +1,7 @@
 package model;
 
+import service.Method;
+
 public abstract class Vehicle {
     public static final int BEGIN_DISTANCE = 0;
     public static final boolean DEFAULT_STATUS = true;
@@ -37,7 +39,7 @@ public abstract class Vehicle {
     }
 
     public void setDistance(int distance) {
-        this.distance = distance;
+        this.distance += distance;
     }
 
     public void setStatus(boolean avaiable) {
@@ -46,8 +48,8 @@ public abstract class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "licensePlate='" + licensePlate + '\'' +
+        return Method.getClassName(this) +
+                " { licensePlate='" + licensePlate + '\'' +
                 ", driverName='" + driverName + '\'' +
                 ", distance=" + distance +" revenue = "+getRevenue()+
                 ", isAvaiable=" + isAvaiable +
