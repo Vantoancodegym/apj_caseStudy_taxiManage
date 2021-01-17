@@ -2,7 +2,9 @@ package model;
 
 import model.Vehicle;
 
-public class Taxi extends Vehicle {
+import java.io.Serializable;
+
+public class Taxi extends Vehicle implements Serializable {
 
     public static final int PRICE_PER_1_KM = 10;
 

@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public interface Manage {
+    void setVehicleList(List<Vehicle> vehicleList);
     List<Vehicle> getVehicleList();
     List<Vehicle> getListAvaiable();
     void addNew(Vehicle vehicle);

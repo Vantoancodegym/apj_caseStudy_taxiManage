@@ -12,6 +12,12 @@ public class ProxyManage implements Manage,Runnable{
         this.vehicleManage=vehicleManage;
         this.position=position;
     }
+
+    @Override
+    public void setVehicleList(List<Vehicle> vehicleList) {
+        if (position.equals("manage")) vehicleManage.setVehicleList(vehicleList);
+    }
+
     @Override
     public List<Vehicle> getVehicleList() {
         if (position.equals("manage"))return vehicleManage.getVehicleList();
@@ -72,7 +78,7 @@ public class ProxyManage implements Manage,Runnable{
         while (true) {
             this.releaseVehicle();
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

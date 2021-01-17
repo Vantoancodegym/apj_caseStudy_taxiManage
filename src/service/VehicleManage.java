@@ -1,6 +1,7 @@
 package service;
 import model.Manage;
 import model.Vehicle;
+import storage.ReadAndWrite;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,9 +9,17 @@ import java.util.Comparator;
 import java.util.List;
 
 public class VehicleManage implements Manage {
-    private static List<Vehicle> vehicleList;
+    static public final String FILE_NAME="caseStudy.dat";
+    private static VehicleManage instance;
+    private List<Vehicle> vehicleList;
+    private VehicleManage(){};
+    public static VehicleManage getInstance(){
+        if (instance==null) instance=new VehicleManage();
+        return instance;
+    }
+    @Override
     public void setVehicleList(List<Vehicle> vehicleList) {
-        VehicleManage.vehicleList = vehicleList;
+        this.vehicleList = vehicleList;
     }
     @Override
     public List<Vehicle> getVehicleList() {
@@ -27,6 +36,7 @@ public class VehicleManage implements Manage {
     @Override
     public void addNew(Vehicle vehicle){
         vehicleList.add(vehicle);
+        ReadAndWrite.writeFile(FILE_NAME,vehicleList);
     }
     @Override
     public String editName(String licensePlate, String name){
@@ -34,6 +44,7 @@ public class VehicleManage implements Manage {
             if (v.getLicensePlate().equals(licensePlate)){
                 if (v.getStatus()) {
                     v.setDriverName(name);
+                    ReadAndWrite.writeFile(FILE_NAME,vehicleList);
                     return "Đã thay lái xe thành công";
                 }else return "Xe đang chạy bạn không thể thay lái xe";
             }
@@ -46,6 +57,7 @@ public class VehicleManage implements Manage {
             if (v.getLicensePlate().equals(licensePlate)){
                 if (v.getStatus()) {
                     vehicleList.remove(v);
+                    ReadAndWrite.writeFile(FILE_NAME,vehicleList);
                     return "Đã xóa thành công";
                 }else return "Xe đang chạy không thể xóa";
             }
@@ -61,6 +73,7 @@ public class VehicleManage implements Manage {
                 v.setDistance(distance);
                 vehicleList.remove(v);
                 vehicleList.add(v);
+                ReadAndWrite.writeFile(FILE_NAME,vehicleList);
                     System.out.println("Đặt xe thành công "+v);
                 return;
                 }
@@ -71,7 +84,11 @@ public class VehicleManage implements Manage {
     @Override
     public void releaseVehicle(){
         for (Vehicle v:vehicleList) {
-            v.setStatus(true);
+            if (!v.getStatus()){
+                v.setStatus(true);
+                ReadAndWrite.writeFile(FILE_NAME,vehicleList);
+                break;
+            }
         }
     }
     @Override

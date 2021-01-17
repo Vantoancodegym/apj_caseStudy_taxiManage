@@ -2,7 +2,9 @@ package model;
 
 import service.Method;
 
-public abstract class Vehicle {
+import java.io.Serializable;
+
+public abstract class Vehicle implements Serializable {
     public static final int BEGIN_DISTANCE = 0;
     public static final boolean DEFAULT_STATUS = true;
     private String licensePlate;

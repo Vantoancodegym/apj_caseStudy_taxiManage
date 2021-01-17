@@ -1,6 +1,8 @@
 package model;
 
-public class Motorbike extends Vehicle{
+import java.io.Serializable;
+
+public class Motorbike extends Vehicle implements Serializable {
 
     public static final int PRICE_PER_1_KM = 5;
 
