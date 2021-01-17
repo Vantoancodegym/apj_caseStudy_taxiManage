@@ -13,9 +13,9 @@ public class Main {
     static Comparator<Vehicle> comparator2=new DecreaseSortByRenvenueVehicle();
     public static void main(String[] args) {
         List<Vehicle> list=new ArrayList<>();
-        toan.setVehicleList(list);
         ProxyManage manage=new ProxyManage(toan,"manage");
         ProxyManage client=new ProxyManage(toan,"client");
+        manage.setVehicleList(list);
         Vehicle tax1=new Taxi("A1234","Mừng");
         Vehicle tax2=new Taxi("A1235","thanh");
         Vehicle bike1=new Motorbike("B2331","hieu");
