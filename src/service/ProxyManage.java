@@ -1,76 +1,72 @@
-package model;
+package service;
 
-import service.VehicleManage;
-
+import model.Position;
+import model.Vehicle;
 import java.util.Comparator;
 import java.util.List;
 
 public class ProxyManage implements Manage,Runnable{
     private VehicleManage vehicleManage;
-    private String position;
-    public ProxyManage(VehicleManage vehicleManage, String position){
+    private Position position;
+    public ProxyManage(VehicleManage vehicleManage, Position position){
         this.vehicleManage=vehicleManage;
         this.position=position;
     }
 
     @Override
     public void setVehicleList(List<Vehicle> vehicleList) {
-        if (position.equals("manage")) vehicleManage.setVehicleList(vehicleList);
+        if (position==Position.MANAGE) vehicleManage.setVehicleList(vehicleList);
     }
 
     @Override
     public List<Vehicle> getVehicleList() {
-        if (position.equals("manage"))return vehicleManage.getVehicleList();
+        if (position==Position.MANAGE)return vehicleManage.getVehicleList();
         return null;
     }
 
     @Override
     public List<Vehicle> getListAvaiable() {
-        if (position.equals("client"))return vehicleManage.getListAvaiable();
+        if (position==Position.CLIENT) return vehicleManage.getListAvaiable();
         return null;
     }
 
     @Override
     public void addNew(Vehicle vehicle) {
-        if (position.equals("manage"))vehicleManage.addNew(vehicle);
+        if (position==Position.MANAGE) vehicleManage.addNew(vehicle);
     }
 
     @Override
     public String editName(String licensePlate, String name) {
-        if (position.equals("manage"))return vehicleManage.editName(licensePlate,name);
+        if (position==Position.MANAGE) return vehicleManage.editName(licensePlate,name);
         return null;
     }
 
     @Override
     public String remove(String licensePlate) {
-        if (position.equals("manage"))return vehicleManage.remove(licensePlate);
+        if (position==Position.MANAGE) return vehicleManage.remove(licensePlate);
         return null;
     }
 
     @Override
     public void takeAVehicle(int distance, String type) {
-        if (position.equals("client")) vehicleManage.takeAVehicle(distance,type);
+        if (position==Position.CLIENT) vehicleManage.takeAVehicle(distance,type);
     }
 
     @Override
     public void releaseVehicle() {
-        if (position.equals("client"))vehicleManage.releaseVehicle();
+        if (position==Position.CLIENT) vehicleManage.releaseVehicle();
     }
 
     @Override
     public List<Vehicle> sort(Comparator<Vehicle> comparator) {
-        if (position.equals("manage"))return vehicleManage.sort(comparator);
+        if (position==Position.MANAGE) return vehicleManage.sort(comparator);
         return null;
     }
 
     @Override
-    public void show(List<Vehicle> list) throws NullPointerException{
-        try {
-            vehicleManage.show(list);
-        }catch (NullPointerException e){
-            System.out.println("Danh sách trống");
-
-        }
+    public void show(List<Vehicle> list){
+        if (list.size()==0) System.out.println("Danh sách trống");
+        else vehicleManage.show(list);
     }
 
     @Override

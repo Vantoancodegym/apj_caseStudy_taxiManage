@@ -3,6 +3,17 @@ package storage;
 import java.io.*;
 
 public class ReadAndWrite {
+    public static File creatNewFile(String fileName){
+        File saveFile=new File(fileName);
+        if (!saveFile.exists()){
+            try {
+                saveFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return saveFile;
+    }
     public static void writeFile(String fileName, Object object){
         try {
             FileOutputStream fileOutputStream=new FileOutputStream(fileName);
