@@ -72,9 +72,9 @@ public class ProxyManage implements Manage,Runnable{
     @Override
     public void run() {
         while (true) {
-            this.releaseVehicle();
             try {
-                Thread.sleep(1000);
+                this.releaseVehicle();
+                Thread.sleep(60000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

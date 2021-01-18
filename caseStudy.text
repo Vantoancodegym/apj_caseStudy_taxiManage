@@ -1,0 +1,1 @@
+Taxi { licensePlate='HG-12345', driverName='Toàn', distance=50 revenue = 500, isAvaiable=true}

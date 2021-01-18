@@ -28,19 +28,7 @@ public class Main {
         manage.setVehicleList(list);
         int choice;
         do {
-            System.out.println("--- Client ---");
-            System.out.println("1. Hiện thị danh sách xe đang rảnh");
-            System.out.println("2. Đặt xe tự động");
-            System.out.println("--- Manage ---");
-            System.out.println("3. Thêm mới");
-            System.out.println("4. Thay lái xe");
-            System.out.println("5. Xóa");
-            System.out.println("6. Hiển thị top 3 có doanh thu cao nhât");
-            System.out.println("7. Hiển thị top 3 có doanh thu thấp nhât");
-            System.out.println("8. Hiển thị toàn bộ danh sách");
-            System.out.println("0. Thoát chương trình");
-            System.out.println("--------------------");
-            choice= scanner.nextInt();
+            choice = Menu();
             switch (choice){
                 case 1:
                     client.show(client.getListAvaiable());
@@ -76,17 +64,37 @@ public class Main {
         }while (choice!=0);
     }
 
+    private static int Menu() {
+        int choice;
+        System.out.println("--- Client ---");
+        System.out.println("1. Hiện thị danh sách xe đang rảnh");
+        System.out.println("2. Đặt xe tự động");
+        System.out.println("--- Manage ---");
+        System.out.println("3. Thêm mới");
+        System.out.println("4. Thay lái xe");
+        System.out.println("5. Xóa");
+        System.out.println("6. Hiển thị top 3 có doanh thu cao nhât");
+        System.out.println("7. Hiển thị top 3 có doanh thu thấp nhât");
+        System.out.println("8. Hiển thị toàn bộ danh sách");
+        System.out.println("0. Thoát chương trình");
+        System.out.println("--------------------");
+        choice= scanner.nextInt();
+        return choice;
+    }
+
     public static String getPlate() {
         String licensePlate;
+        Scanner input=new Scanner(System.in);
         do {
-            System.out.println("Nhập biển số xe cần xóa");
-            licensePlate=scanner.nextLine();
+            System.out.println("Nhập biển số xe");
+            licensePlate=input.nextLine();
         }while (!licensePlate.matches(REGEX_PLATE));
         return licensePlate;
     }
     public static String getName(){
+        Scanner input=new Scanner(System.in);
         System.out.println("Nhập tên lái xe");
-        String name=scanner.nextLine();
+        String name=input.nextLine();
         return name;
     }
     public static Vehicle getVehicle(){

@@ -35,10 +35,9 @@ public class ReadAndWrite {
             for (Vehicle v:list) {
                 writer.write(v.toString()+"\n");
             }
-            fileWriter.close();
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("sda");
         }
 
     }

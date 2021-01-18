@@ -36,7 +36,7 @@ public class VehicleManage implements Manage {
     public void addNew(Vehicle vehicle){
         vehicleList.add(vehicle);
         ReadAndWrite.writeFile(FILE_NAME,vehicleList);
-        ReadAndWrite.writeFileToText(FILE_NAME,vehicleList);
+        ReadAndWrite.writeFileToText(FILE_NAME_TEXT,vehicleList);
     }
     @Override
     public String editName(String licensePlate, String name){
@@ -45,7 +45,7 @@ public class VehicleManage implements Manage {
                 if (v.getStatus()) {
                     v.setDriverName(name);
                     ReadAndWrite.writeFile(FILE_NAME,vehicleList);
-                    ReadAndWrite.writeFileToText(FILE_NAME,vehicleList);
+                    ReadAndWrite.writeFileToText(FILE_NAME_TEXT,vehicleList);
                     return "Đã thay lái xe thành công";
                 }else return "Xe đang chạy bạn không thể thay lái xe";
             }
@@ -59,7 +59,7 @@ public class VehicleManage implements Manage {
                 if (v.getStatus()) {
                     vehicleList.remove(v);
                     ReadAndWrite.writeFile(FILE_NAME,vehicleList);
-                    ReadAndWrite.writeFileToText(FILE_NAME,vehicleList);
+                    ReadAndWrite.writeFileToText(FILE_NAME_TEXT,vehicleList);
                     return "Đã xóa thành công";
                 }else return "Xe đang chạy không thể xóa";
             }
@@ -75,7 +75,8 @@ public class VehicleManage implements Manage {
                 v.setDistance(distance);
                 vehicleList.remove(v);
                 vehicleList.add(v);
-                ReadAndWrite.writeFile(FILE_NAME,vehicleList);
+                    ReadAndWrite.writeFile(FILE_NAME,vehicleList);
+                    ReadAndWrite.writeFileToText(FILE_NAME_TEXT,vehicleList);
                     System.out.println("Đặt xe thành công "+v);
                 return;
                 }
@@ -89,7 +90,7 @@ public class VehicleManage implements Manage {
             if (!v.getStatus()){
                 v.setStatus(true);
                 ReadAndWrite.writeFile(FILE_NAME,vehicleList);
-                ReadAndWrite.writeFileToText(FILE_NAME,vehicleList);
+                ReadAndWrite.writeFileToText(FILE_NAME_TEXT,vehicleList);
                 break;
             }
         }
