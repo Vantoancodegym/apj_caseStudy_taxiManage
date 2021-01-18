@@ -121,7 +121,7 @@ public class Main {
         else client.takeAVehicle(distance, MOTORBIKE_TYPE);
     }
     public static void showTop3Max(Manage manage){
-        List<Vehicle> list=manage.sort(increase);
+        List<Vehicle> list=manage.sort(decreace);
         int count=0;
         for (Vehicle v:list) {
             if (count<4){
@@ -131,7 +131,7 @@ public class Main {
         }
     }
     public static void showTop3Min(Manage manage){
-        List<Vehicle> list=manage.sort(decreace);
+        List<Vehicle> list=manage.sort(increase);
         int count=0;
         for (Vehicle v:list) {
             if (count<4){

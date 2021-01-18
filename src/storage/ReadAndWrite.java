@@ -37,7 +37,6 @@ public class ReadAndWrite {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("sda");
         }
 
     }
