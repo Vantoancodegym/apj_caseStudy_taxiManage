@@ -8,6 +8,7 @@ import java.util.List;
 
 public class VehicleManage implements Manage {
     static public final String FILE_NAME="caseStudy.dat";
+    static public final String FILE_NAME_TEXT="caseStudy.text";
     private static VehicleManage instance;
     private List<Vehicle> vehicleList;
     private VehicleManage(){};
@@ -35,6 +36,7 @@ public class VehicleManage implements Manage {
     public void addNew(Vehicle vehicle){
         vehicleList.add(vehicle);
         ReadAndWrite.writeFile(FILE_NAME,vehicleList);
+        ReadAndWrite.writeFileToText(FILE_NAME,vehicleList);
     }
     @Override
     public String editName(String licensePlate, String name){
@@ -43,6 +45,7 @@ public class VehicleManage implements Manage {
                 if (v.getStatus()) {
                     v.setDriverName(name);
                     ReadAndWrite.writeFile(FILE_NAME,vehicleList);
+                    ReadAndWrite.writeFileToText(FILE_NAME,vehicleList);
                     return "Đã thay lái xe thành công";
                 }else return "Xe đang chạy bạn không thể thay lái xe";
             }
@@ -56,6 +59,7 @@ public class VehicleManage implements Manage {
                 if (v.getStatus()) {
                     vehicleList.remove(v);
                     ReadAndWrite.writeFile(FILE_NAME,vehicleList);
+                    ReadAndWrite.writeFileToText(FILE_NAME,vehicleList);
                     return "Đã xóa thành công";
                 }else return "Xe đang chạy không thể xóa";
             }
@@ -85,6 +89,7 @@ public class VehicleManage implements Manage {
             if (!v.getStatus()){
                 v.setStatus(true);
                 ReadAndWrite.writeFile(FILE_NAME,vehicleList);
+                ReadAndWrite.writeFileToText(FILE_NAME,vehicleList);
                 break;
             }
         }

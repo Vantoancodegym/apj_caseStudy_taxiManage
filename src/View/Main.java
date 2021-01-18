@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Main {
     public static final String TAXI_TYPE = "Taxi";
     public static final String MOTORBIKE_TYPE = "Motorbike";
+    public static final String REGEX_PLATE = "[A-Z]{2}-[0-9]{5}";
     public static VehicleManage vehicleManage=VehicleManage.getInstance();
     public static Scanner scanner=new Scanner(System.in);
     public static void main(String[] args) {
@@ -32,11 +33,9 @@ public class Main {
             System.out.println("3. Thêm mới");
             System.out.println("4. Thay lái xe");
             System.out.println("5. Xóa");
-            System.out.println("6. Sắp xếp và hiện thị theo thứ tự doanh số tăng dần");
-            System.out.println("7. Sắp xếp và hiện thị theo thứ tự doanh số giảm dần");
-            System.out.println("8. Hiển thị top 3 có doanh thu cao nhât");
-            System.out.println("9. Hiển thị top 3 có doanh thu thấp nhât");
-            System.out.println("10. Hiển thị toàn bộ danh sách");
+            System.out.println("6. Hiển thị top 3 có doanh thu cao nhât");
+            System.out.println("7. Hiển thị top 3 có doanh thu thấp nhât");
+            System.out.println("8. Hiển thị toàn bộ danh sách");
             System.out.println("0. Thoát chương trình");
             System.out.println("--------------------");
             choice= scanner.nextInt();
@@ -48,20 +47,53 @@ public class Main {
                     takeAVehicle(client);
                     break;
                 case 3:
+                    Vehicle newVehicle=getVehicle();
+                    manage.addNew(newVehicle);
+                    break;
                 case 4:
+                    String licensePlateEdit=getPlate();
+                    String newName=getName();
+                    manage.editName(licensePlateEdit,newName);
+                    break;
                 case 5:
+                    String licensePlateRemove=getPlate();
+                    System.out.println(manage.remove(licensePlateRemove));
+                    break;
                 case 6:
                 case 7:
                 case 8:
-                case 9:
-                case 10:
                 case 0:
                     System.exit(0);
             }
         }while (choice!=0);
     }
 
-    private static void takeAVehicle(ProxyManage client) {
+    public static String getPlate() {
+        String licensePlate;
+        do {
+            System.out.println("Nhập biển số xe cần xóa");
+            licensePlate=scanner.nextLine();
+        }while (!licensePlate.matches(REGEX_PLATE));
+        return licensePlate;
+    }
+    public static String getName(){
+        System.out.println("Nhập tên lái xe");
+        String name=scanner.nextLine();
+        return name;
+    }
+    public static Vehicle getVehicle(){
+        String licensePlate=getPlate();
+        String name=getName();
+        int type;
+        do {
+            System.out.println("Chọn loại phương tiện: 1. Taxi 2.Xe ôm");
+            type=scanner.nextInt();
+        }while (type!=1&&type!=2);
+        if (type==1) return VehicleFactory.getVehicle(VehicleTpye.Taxi,name,licensePlate);
+        else return VehicleFactory.getVehicle(VehicleTpye.Motorbike,name,licensePlate);
+    }
+
+    public static void takeAVehicle(ProxyManage client) {
         System.out.println("Nhập khoảng cách cần đi");
         int distance=scanner.nextInt();
         int type;

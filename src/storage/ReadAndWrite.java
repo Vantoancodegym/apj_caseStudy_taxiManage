@@ -1,6 +1,9 @@
 package storage;
 
+import model.Vehicle;
+
 import java.io.*;
+import java.util.List;
 
 public class ReadAndWrite {
     public static File creatNewFile(String fileName){
@@ -24,6 +27,20 @@ public class ReadAndWrite {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+    }
+    public static void writeFileToText(String fileName, List<Vehicle> list){
+        try {
+            FileWriter fileWriter=new FileWriter(fileName);
+            BufferedWriter writer=new BufferedWriter(fileWriter);
+            for (Vehicle v:list) {
+                writer.write(v.toString()+"\n");
+            }
+            fileWriter.close();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     public static Object readFile(String fileName){
         try {
