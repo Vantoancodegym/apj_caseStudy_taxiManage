@@ -13,6 +13,8 @@ public class Main {
     public static final String MOTORBIKE_TYPE = "Motorbike";
     public static final String REGEX_PLATE = "[A-Z]{2}-[0-9]{5}";
     public static VehicleManage vehicleManage=VehicleManage.getInstance();
+    public static IncreaseSortByRevenueVehicle increase=new IncreaseSortByRevenueVehicle();
+    public static DecreaseSortByRenvenueVehicle decreace=new DecreaseSortByRenvenueVehicle();
     public static Scanner scanner=new Scanner(System.in);
     public static void main(String[] args) {
         File saveFile= ReadAndWrite.creatNewFile(VehicleManage.FILE_NAME);
@@ -60,8 +62,14 @@ public class Main {
                     System.out.println(manage.remove(licensePlateRemove));
                     break;
                 case 6:
+                    showTop3Max(manage);
+                    break;
                 case 7:
+                    showTop3Min(manage);
+                    break;
                 case 8:
+                    manage.show(manage.getVehicleList());
+                    break;
                 case 0:
                     System.exit(0);
             }
@@ -103,5 +111,25 @@ public class Main {
         }while (type!=1&&type!=2);
         if (type==1) client.takeAVehicle(distance, TAXI_TYPE);
         else client.takeAVehicle(distance, MOTORBIKE_TYPE);
+    }
+    public static void showTop3Max(Manage manage){
+        List<Vehicle> list=manage.sort(increase);
+        int count=0;
+        for (Vehicle v:list) {
+            if (count<4){
+            System.out.println(v);
+            count++;
+            }
+        }
+    }
+    public static void showTop3Min(Manage manage){
+        List<Vehicle> list=manage.sort(decreace);
+        int count=0;
+        for (Vehicle v:list) {
+            if (count<4){
+                System.out.println(v);
+                count++;
+            }
+        }
     }
 }
