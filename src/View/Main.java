@@ -12,12 +12,13 @@ public class Main {
     public static final String TAXI_TYPE = "Taxi";
     public static final String MOTORBIKE_TYPE = "Motorbike";
     public static final String REGEX_PLATE = "[A-Z]{2}-[0-9]{5}";
+    public static final int MAX_TIMES = 3;
     public static VehicleManage vehicleManage=VehicleManage.getInstance();
     public static IncreaseSortByRevenueVehicle increase=new IncreaseSortByRevenueVehicle();
-    public static DecreaseSortByRenvenueVehicle decreace=new DecreaseSortByRenvenueVehicle();
+    public static DecreaseSortByRenvenueVehicle decrease=new DecreaseSortByRenvenueVehicle();
     public static Scanner scanner=new Scanner(System.in);
     public static void main(String[] args) {
-        File saveFile= ReadAndWrite.creatNewFile(VehicleManage.FILE_NAME);
+        ReadAndWrite.creatNewFile(VehicleManage.FILE_NAME);
         Object obj=ReadAndWrite.readFile(VehicleManage.FILE_NAME);
         List<Vehicle> list;
         list=(obj==null)?new ArrayList<>():((List<Vehicle>)obj);
@@ -110,8 +111,11 @@ public class Main {
     }
 
     public static void takeAVehicle(ProxyManage client) {
-        System.out.println("Nhập khoảng cách cần đi");
-        int distance=scanner.nextInt();
+        int distance;
+        do {
+            System.out.println("Nhập khoảng cách cần đi");
+            distance=scanner.nextInt();
+        }while (distance<0);
         int type;
         do {
             System.out.println("Chọn loại phương tiện: 1. Taxi 2.Xe ôm");
@@ -121,10 +125,10 @@ public class Main {
         else client.takeAVehicle(distance, MOTORBIKE_TYPE);
     }
     public static void showTop3Max(Manage manage){
-        List<Vehicle> list=manage.sort(decreace);
+        List<Vehicle> list=manage.sort(decrease);
         int count=0;
         for (Vehicle v:list) {
-            if (count<4){
+            if (count<MAX_TIMES){
             System.out.println(v);
             count++;
             }
@@ -134,7 +138,7 @@ public class Main {
         List<Vehicle> list=manage.sort(increase);
         int count=0;
         for (Vehicle v:list) {
-            if (count<4){
+            if (count< MAX_TIMES){
                 System.out.println(v);
                 count++;
             }

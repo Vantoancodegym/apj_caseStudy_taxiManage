@@ -57,6 +57,5 @@ public abstract class Vehicle implements Serializable {
                 ", isAvaiable=" + isAvaiable +
                 '}';
     }
-
     public abstract int getRevenue();
 }
